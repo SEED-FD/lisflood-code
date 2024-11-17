@@ -435,7 +435,7 @@ You can use builtin path variables in this template and reference to other paths
         <textvar name="ReservoirFloodStorage" value="0.75">
             <comment>
                 Fraction of the total reservoir storage above which the reservoirs enters
-                the flood control zone.
+                the flood control zone. It can be a map (NetCDF), a table (TXT) or a float
                   Units: -
                   Range: 0.2 - 0.99
                   Default: 0.75
@@ -444,8 +444,9 @@ You can use builtin path variables in this template and reference to other paths
 
         <textvar name="ReservoirFloodOutflowFactor" value="0.3">
             <comment>
-                Factor of the 100-year return inflow (`TabFloodOutflow`) that defines the inflow
+                Factor of the 100-year return inflow (`ReservoirFloodOutflow`) that defines the inflow
                 value that switches the reservoir routine to flood control mode, when exceeded.
+                It can be a map (NetCDF), a table (TXT) or a float
                   Units: -
                   Range: 0.1 - 0.5
                   Default: 0.3
@@ -4951,39 +4952,30 @@ You can use builtin path variables in this template and reference to other paths
           Input tables
         </comment>
 
-        <textvar name="TabTotStorage" value="$(PathTables)/res_storage.txt">
+        <textvar name="ReservoirTotalStorage" value="$(PathTables)/res_storage.txt">
             <comment>
                 Total reservoir storage capacity
                   Units: m³
             </comment>
         </textvar>
 
-        <textvar name="TabCatchmentArea" value="$(PathTables)/res_catchment.txt">
-            <comment>
-                Reservoir catchment area. Used to estimate the release coefficient k in
-                the Hanazaki model:
-                  k = max(1 - 5 * total_storage * (1 - flood_fill) / catch_area), 0)
-                  Units: m²
-            </comment>
-        </textvar>
-
-        <textvar name="TabFloodOutflow" value="$(PathTables)/res_flood_outflow.txt">
+        <textvar name="ReservoirFloodOutflow" value="$(PathTables)/res_100yr_inflow.txt">
             <comment>
                 Reservoir inflow associated with the 100-year return period.
-                It is modified by the calibrated factor to define the inflow above which the reservoir
-                switches to flood control mode
+                It is modified by a calibration parameter (`ReservoirFloodOutflowFactor`) to
+                define the inflow above which the reservoir switches to flood control mode
                     Units: m³/s
             </comment>
         </textvar>
 
-        <textvar name="TabNormalOutflow" value="$(PathTables)/res_normal_outflow.txt">
+        <textvar name="ReservoirNormalOutflow" value="$(PathTables)/res_avg_inflow.txt">
             <comment>
                 Reservoir average inflow used to define the normal reservoir release
                     Units: m³/s
             </comment>
         </textvar>
 
-        <textvar name="TabMinOutflow" value="$(PathTables)/res_min_outflow.txt">
+        <textvar name="ReservoirMinOutflow" value="$(PathTables)/res_min_outflow.txt">
             <comment>
                 Minimum reservoir release:
                     Units: m³/s
