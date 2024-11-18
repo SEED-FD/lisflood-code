@@ -64,7 +64,7 @@ class Reservoir(HydroModule):
             'ReservoirSites', 'ReservoirTotalStorage', # reservoir characteristics
             'ReservoirMinOutflow', 'ReservoirNormalOutflow', 'ReservoirFloodOutflow', # release attributes
             'ReservoirFloodStorage', 'ReservoirFloodOutflowFactor', # calibration parameters
-            'ReservoirInitialFillValue', # initial conditions
+            'ReservoirInitialFill', # initial conditions
     ]}
     
     module_name = 'Reservoir'
@@ -191,7 +191,7 @@ class Reservoir(HydroModule):
             
             # initial reservoir fill (fraction of total storage, [-])
             # -9999: assume reservoirs are filled to 80% of the flood storage limit
-            initial_fill = loadmap('ReservoirInitialFillValue')
+            initial_fill = loadmap('ReservoirInitialFill')
             if np.max(initial_fill) == -9999:
                 initial_fill = 0.8 * self.var.FloodStorageLimit,
             else:

@@ -1471,10 +1471,10 @@ You can use builtin path variables in this template and reference to other paths
     </comment>
     </textvar>
 
-    <textvar name="ReservoirInitialFillValue" value="$(PathInit)/rsfil">
+    <textvar name="ReservoirInitialFill" value="$(PathInit)/rsfil">
     <comment>
     Initial reservoir fill fraction [-]
-    -9999 sets initial fill to normal storage limit
+    -9999 sets initial fill to 80% of the flood limit
     if you're not using the reservoir option, enter some bogus value
     </comment>
     </textvar>
