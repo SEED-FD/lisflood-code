@@ -446,7 +446,8 @@ You can use builtin path variables in this template and reference to other paths
             <comment>
                 Factor of the 100-year return inflow (`ReservoirFloodOutflow`) that defines the inflow
                 value that switches the reservoir routine to flood control mode, when exceeded.
-                It can be a map (NetCDF), a table (TXT) or a float
+                It can be a map (NetCDF), a table (TXT) or a float. Negative values will be replaced
+                by the default value of 0.3
                   Units: -
                   Range: 0.1 - 0.5
                   Default: 0.3
@@ -4942,7 +4943,7 @@ You can use builtin path variables in this template and reference to other paths
           </comment>
         </textvar>
 
-        <textvar name="ReservoirInitialFillValue" value="$(ReservoirInitialFillValue)">
+        <textvar name="ReservoirInitialFill" value="$(ReservoirInitialFill)">
           <comment>
             Initial reservoir storage (fraction)
           </comment>
