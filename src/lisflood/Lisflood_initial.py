@@ -136,7 +136,7 @@ class LisfloodModel_ini(DynamicModel):
         self.routing_module = routing(self)
         self.groundwater_module = groundwater(self)
         self.surface_routing_module = surface_routing(self)
-        self.reservoir_module = Reservoir(self)
+        self.reservoir_module = Reservoir(self) # get_reservoir(option['reservoirHanazaki'])
         self.lakes_module = lakes(self)
         self.polder_module = polder(self)
         self.waterabstraction_module = waterabstraction(self)

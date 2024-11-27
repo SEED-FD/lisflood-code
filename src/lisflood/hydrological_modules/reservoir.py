@@ -128,8 +128,8 @@ class Reservoir(HydroModule):
             # reservoir storage capacity [m3]
             total_storage = lookupscalar(str(binding['ReservoirTotalStorage']), reservoirs_pcr)
             total_storage = compressArray(total_storage)
-            total_storage = np.where(np.isnan(total_storage), 0, total_storage)
-            self.var.TotalReservoirStorageM3 = np.compress(self.var.ReservoirSitesC > 0, total_storage)
+            self.var.TotalReservoirStorageM3C = np.where(np.isnan(total_storage), 0, total_storage)
+            self.var.TotalReservoirStorageM3 = np.compress(self.var.ReservoirSitesC > 0, self.var.TotalReservoirStorageM3C)
             
             # reservoir catchment area [m2]
             catchment_area = loadmap('UpAreaTrans')
@@ -154,6 +154,7 @@ class Reservoir(HydroModule):
             else:
                 factor_outflow = loadmap('ReservoirFloodOutflowFactor')
                 factor_outflow = makenumpy(factor_outflow)
+            factor_outflow = np.where(factor_outflow <= 0, 0.3, factor_outflow)
             factor_outflow = np.compress(self.var.ReservoirSitesC > 0, factor_outflow)
 
             # STORAGE LIMITS
